@@ -1,38 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext} from "react";
 import Context from "../../providers/Context";
 
 const TodoList = () => {
 
-    const {inputValue, setinputValue} = useContext(Context);
-    const [checked, setChecked] = useState([]);
-
-    const toggleCrossOut = (event) => {
-        let updatedList = [...checked];
-        if (event.target.checked) {
-            updatedList = [...checked, event.target.value];
-        } else {
-            updatedList.splice(checked.indexOf(event.target.value), 1);
-        }
-        setChecked(updatedList);
-    };
-
-    const checkedItem = {
-        textDecoration: "line-through",
-    };
-
-    const isChecked = (item) => {
-        if (checked.includes(item)) {
-            return checkedItem;
-        }
-    };
-
-    const removeTodoList = (index) => {
-        setinputValue([...inputValue.slice(0, index), ...inputValue.slice(index + 1)]);
-    };
-    
+    const {inputValue, toggleCrossOut, isChecked, removeTodoList} = useContext(Context);
+   
     return (
        
-        
         <ul style={{ listStyle: "none" }}>
             {!inputValue?.length && <li>No date</li>}
             {inputValue?.map((item, idx) => {
